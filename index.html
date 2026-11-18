@@ -7,21 +7,34 @@
 <meta name="description" content="The official Fractured SMP website: members, episodes, news and story.">
 <title>FRACTURED SMP — Every world has a breaking point</title>
 <link rel="icon" href="assets/logo.jpg">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Manrope:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Manrope:wght@400;600&family=Orbitron:wght@600;800&family=Rajdhani:wght@500;700&family=Inter:wght@400;600&family=Playfair+Display:wght@600;700&display=swap">
 <style>
-:root{--bg:#090710;--panel:#14101f;--tx:#ece9f5;--mu:#9d97b5;--ac:#ff6a3d;--hd:'Cinzel',Georgia,serif;--bd:'Manrope',system-ui,sans-serif}
+:root{
+  --bg:#090710;
+  --panel:#14101f;
+  --tx:#ece9f5;
+  --mu:#9d97b5;
+  --ac:#a855f7;
+  --nebula1:#4a2478;
+  --nebula2:#8a2f16;
+  --hd:'Cinzel',Georgia,serif;
+  --bd:'Manrope',system-ui,sans-serif;
+}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font:16px/1.65 var(--bd);min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:-20%;z-index:0;opacity:.35;background:radial-gradient(40% 40% at 18% 22%,#4a2478,transparent 70%),radial-gradient(35% 35% at 82% 72%,#8a2f16,transparent 70%);animation:dr 30s ease-in-out infinite alternate}
+body{background:var(--bg);color:var(--tx);font:16px/1.65 var(--bd);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:-20%;z-index:0;opacity:.35;background:radial-gradient(40% 40% at 18% 22%,var(--nebula1),transparent 70%),radial-gradient(35% 35% at 82% 72%,var(--nebula2),transparent 70%);animation:dr 30s ease-in-out infinite alternate;pointer-events:none}
+body.fx-none::before,body.fx-none #fx{display:none}
 @keyframes dr{to{transform:translate(5%,4%) scale(1.12)}}
-#bgi{position:fixed;inset:0;z-index:0;background:center/cover;opacity:.3}
+#bgi{position:fixed;inset:0;z-index:0;background:center/cover no-repeat;opacity:.3;pointer-events:none;transition:opacity .3s}
 #fx{position:fixed;inset:0;z-index:0;pointer-events:none}
 h1,h2,h3{font-family:var(--hd);line-height:1.15}
 h2{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:28px}
 a{color:inherit}
-button{font:inherit;color:inherit}
+button,input,textarea,select{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+
+/* Top Navigation (Unchanged public footprint) */
 .top{position:fixed;top:0;left:0;right:0;z-index:45;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:linear-gradient(#090710ee,#09071000)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 1rem var(--hd);letter-spacing:.08em}
 .brand img{width:36px;height:36px;border-radius:50%;object-fit:cover}
@@ -32,37 +45,51 @@ button{font:inherit;color:inherit}
 .drawer a:hover{color:var(--ac);text-shadow:0 0 14px var(--ac)}
 .scrim{position:fixed;inset:0;z-index:30;background:#0009;opacity:0;pointer-events:none;transition:opacity .3s}
 .open .scrim{opacity:1;pointer-events:auto}
+
+/* Public Views */
 .view{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:110px 22px 70px;animation:fi .5s}
 .view[hidden]{display:none!important}
 @keyframes fi{from{opacity:0}}
 #v-home{min-height:100vh;display:grid;place-content:center;justify-items:center;text-align:center;gap:16px}
+#v-home.layout-left{justify-items:start;text-align:left}
+#v-home.layout-left .btns{justify-content:flex-start}
 .logo{width:clamp(120px,22vw,190px);aspect-ratio:1;object-fit:cover;border-radius:50%;box-shadow:0 0 60px -6px var(--ac),0 0 0 2px #ffffff22;animation:pu 4s ease-in-out infinite alternate}
 @keyframes pu{to{box-shadow:0 0 90px 0 var(--ac),0 0 0 2px #ffffff40}}
-h1{font-size:clamp(2.3rem,9vw,5.6rem);letter-spacing:.08em;text-shadow:0 0 30px #ff6a3d88}
+h1{font-size:clamp(2.3rem,9vw,5.6rem);letter-spacing:.08em;text-shadow:0 0 30px color-mix(in srgb,var(--ac) 55%,transparent)}
 .crack{width:min(560px,90%);height:auto}
 .crack path{fill:none;stroke:var(--ac);stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 5px var(--ac));animation:cr 2.4s .4s ease-out forwards}
 @keyframes cr{to{stroke-dashoffset:0}}
 #tag{font-size:1.25rem}
 #sub{color:var(--mu)}
 .btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-.btn{padding:12px 26px;border-radius:99px;background:var(--ac);color:#1a0a05;font-weight:600;text-decoration:none;box-shadow:0 0 24px -4px var(--ac)}
+.btn{padding:12px 26px;border-radius:99px;background:var(--ac);color:#1a0a05;font-weight:600;text-decoration:none;box-shadow:0 0 24px -4px var(--ac);border:0;cursor:pointer}
 .btn.g{background:none;color:var(--tx);border:1px solid #ffffff33;box-shadow:none}
+.home-extra{max-width:740px;margin-top:16px;padding:18px 22px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff16;white-space:pre-line}
+
+/* Members Grid & Layouts */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.grid.layout-wide{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .card{position:relative;overflow:hidden;aspect-ratio:4/5;display:flex;align-items:flex-end;padding:20px;border-radius:14px;cursor:pointer;text-align:left;font:700 1.3rem var(--hd);border:1px solid color-mix(in srgb,var(--c) 50%,transparent);background:linear-gradient(160deg,color-mix(in srgb,var(--c) 26%,var(--panel)),var(--panel));background-size:cover;background-position:center;transition:box-shadow .3s,transform .3s}
+.grid.layout-wide .card{aspect-ratio:16/10}
 .card::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 55%,#000c)}
 .card span{position:relative;z-index:1}
 .card:hover,.card:focus-visible{box-shadow:0 0 32px -4px var(--c);transform:translateY(-4px)}
+
+/* Episodes */
 .tools{display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap;margin-bottom:22px}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{background:none;border:1px solid #ffffff26;color:var(--mu);padding:7px 16px;border-radius:99px;cursor:pointer}
 .chip.on{color:#fff;border-color:var(--ac);box-shadow:0 0 16px -2px var(--ac)}
-select{background:var(--panel);color:var(--tx);border:1px solid #ffffff26;border-radius:8px;padding:8px 12px;font:inherit}
+select,input,textarea{background:var(--panel);color:var(--tx);border:1px solid #ffffff26;border-radius:10px;padding:10px 12px;width:100%}
+.tools select{width:auto;padding:8px 12px}
 .ep{display:grid;grid-template-columns:min(260px,38%) 1fr;gap:16px;width:100%;text-align:left;align-items:center;background:#ffffff08;border:1px solid #ffffff14;border-radius:14px;padding:12px;margin-bottom:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
 .ep:hover,.ep:focus-visible{border-color:var(--ac);box-shadow:0 0 24px -8px var(--ac)}
 .ep img,.ep i{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:#1d1830}
 .ep span{display:grid;gap:2px}
 .ep b{font:700 1.15rem var(--hd)}
 .ep time,.ep small{color:var(--mu)}
+
+/* News & Story */
 .post{background:#ffffff08;border:1px solid #ffffff14;border-radius:14px;padding:22px;margin-bottom:22px;max-width:760px}
 .post img{max-width:100%;border-radius:10px;margin-bottom:14px}
 .post time{color:var(--mu);font-size:.9rem}
@@ -73,6 +100,8 @@ select{background:var(--panel);color:var(--tx);border:1px solid #ffffff26;border
 .rx .on{border-color:var(--ac);box-shadow:0 0 12px -2px var(--ac)}
 .empty{color:var(--mu)}
 footer{position:relative;z-index:1;text-align:center;color:var(--mu);padding:24px}
+
+/* Modal */
 .md{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:#000c;padding:16px;animation:fi .25s}
 .md[hidden]{display:none}
 .box{position:relative;width:min(760px,100%);max-height:90vh;overflow:auto;border-radius:16px;border:1px solid var(--c);background:linear-gradient(160deg,color-mix(in srgb,var(--c) 28%,var(--panel)),var(--panel));background-size:cover;background-position:center;box-shadow:0 0 70px -12px var(--c)}
@@ -87,6 +116,64 @@ dd{font-size:1.1rem}
 .pl iframe{width:100%;height:100%;border:0;border-radius:10px}
 .bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .bar a,.bar button{padding:10px 18px;border-radius:99px;border:1px solid #ffffff40;background:#ffffff12;text-decoration:none;cursor:pointer}
+
+/* Live Draft Preview Banner (Only shown when an admin activates Preview) */
+.pv-banner{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:55;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#14101ff2;backdrop-filter:blur(12px);border:1px solid var(--ac);box-shadow:0 0 32px -4px #000,0 0 18px -4px var(--ac);padding:10px 18px;border-radius:99px;font-size:.9rem}
+.pv-banner[hidden]{display:none}
+.pv-banner b{color:var(--ac);font-family:var(--hd);letter-spacing:.05em}
+
+/* PRIVATE EDITS DASHBOARD */
+#v-edits{max-width:1240px}
+.ed-auth{max-width:440px;margin:20px auto;background:#14101fe6;border:1px solid #a855f744;border-radius:18px;padding:28px;box-shadow:0 0 60px -15px #6b21a8}
+.ed-auth h2{font-size:1.7rem;margin-bottom:6px}
+.ed-sub{color:var(--mu);font-size:.92rem;margin-bottom:20px}
+.ed-tabs{display:flex;gap:6px;background:#090710;padding:5px;border-radius:12px;margin-bottom:18px;border:1px solid #ffffff14}
+.ed-tabs button{flex:1;padding:9px;border:0;border-radius:8px;background:none;color:var(--mu);cursor:pointer;font-weight:600}
+.ed-tabs button.on{background:#231a38;color:#fff;box-shadow:0 0 16px -4px #9333ea}
+.fld{display:grid;gap:6px;margin-bottom:14px}
+.fld label{font-size:.85rem;color:var(--mu);font-weight:600}
+.msg{padding:11px 14px;border-radius:10px;font-size:.9rem;margin-bottom:14px;border:1px solid #ffffff22;background:#ffffff0a}
+.msg.err{border-color:#ef444488;background:#ef44441a;color:#fca5a5}
+.msg.ok{border-color:#22c55e88;background:#22c55e1a;color:#86efac}
+.msg[hidden]{display:none}
+
+.ed-shell{display:grid;gap:20px}
+.ed-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;background:#14101fe6;border:1px solid #a855f738;border-radius:16px;padding:18px 22px}
+.ed-title{display:flex;align-items:center;gap:12px}
+.ed-badge{background:linear-gradient(135deg,#7e22ce,#ff6a3d);color:#fff;font:700 .75rem var(--hd);letter-spacing:.12em;padding:4px 10px;border-radius:99px}
+.ed-user{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.9rem;color:var(--mu)}
+.ed-nav{display:flex;gap:8px;flex-wrap:wrap}
+.ed-nav button{background:#14101f;border:1px solid #ffffff1f;color:var(--mu);padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:8px;transition:.2s}
+.ed-nav button.on{color:#fff;border-color:#a855f7;background:#221838;box-shadow:0 0 20px -6px #9333ea}
+.dot{width:8px;height:8px;border-radius:50%;background:#f59e0b;display:inline-block}
+.ed-wf{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:#191229;border:1px solid #a855f744;border-radius:14px;padding:14px 18px}
+.ed-wf-status{font-size:.92rem}
+.ed-wf-btns{display:flex;gap:8px;flex-wrap:wrap}
+.ebtn{padding:9px 16px;border-radius:10px;border:1px solid #ffffff28;background:#ffffff0d;cursor:pointer;font-weight:600;font-size:.9rem;transition:.2s}
+.ebtn:hover{border-color:#ffffff55;background:#ffffff18}
+.ebtn.pri{background:linear-gradient(135deg,#7e22ce,#9333ea);border-color:#a855f7;color:#fff}
+.ebtn.pub{background:var(--ac);border-color:var(--ac);color:#1a0a05}
+.ebtn.dng{border-color:#ef444466;color:#fca5a5}
+.ebtn:disabled{opacity:.45;cursor:not-allowed}
+
+.ed-card{background:#14101fe6;border:1px solid #ffffff18;border-radius:16px;padding:22px;display:grid;gap:16px}
+.ed-card h3{font-size:1.3rem;color:#e9d5ff}
+.ed-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.ed-item{background:#0d0a16;border:1px solid #ffffff16;border-radius:14px;padding:16px;display:grid;gap:12px}
+.ed-item-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.up-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.up-row input[type="text"]{flex:1;min-width:180px}
+.up-lbl{padding:9px 14px;border-radius:10px;border:1px solid #a855f766;background:#24183b;cursor:pointer;font-size:.85rem;font-weight:600;white-space:nowrap}
+.up-lbl input{display:none}
+.chk-row{display:flex;gap:10px;flex-wrap:wrap}
+.chk-pill{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;border:1px solid #ffffff24;background:#14101f;cursor:pointer;font-size:.88rem}
+.chk-pill input{width:auto}
+.hist-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border-radius:12px;background:#0d0a16;border:1px solid #ffffff14}
+.tag-act{font-size:.75rem;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:99px;background:#ffffff14}
+.tag-act.published,.tag-act.restored{background:#22c55e22;color:#86efac;border:1px solid #22c55e55}
+.tag-act.draft{background:#f59e0b22;color:#fcd34d;border:1px solid #f59e0b55}
+.tag-act.discarded{background:#ef444422;color:#fca5a5;border:1px solid #ef444455}
+
 @media(max-width:560px){.ep{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,::before{animation:none!important;transition:none!important}.crack path{stroke-dashoffset:0}}
 </style>
@@ -101,139 +188,1309 @@ dd{font-size:1.1rem}
  <a href="#home">Home</a><a href="#members">Members</a><a href="#episodes">Episodes</a><a href="#news">News &amp; Announcements</a><a href="#story">Story</a>
 </nav>
 <div id="scrim" class="scrim"></div>
+
 <main>
  <section class="view" id="v-home">
-  <img class="logo" src="assets/logo.jpg" alt="Fractured SMP emblem">
-  <h1>FRACTURED SMP</h1>
+  <img class="logo" id="home-logo" src="assets/logo.jpg" alt="Fractured SMP emblem">
+  <h1 id="home-title">FRACTURED SMP</h1>
   <svg class="crack" viewBox="0 0 560 46" aria-hidden="true"><path pathLength="1" d="M0 24L90 14L150 30L230 8L300 34L380 12L450 28L560 20"/></svg>
   <p id="tag"></p><p id="sub"></p>
-  <div class="btns"><a class="btn" href="#members">Meet the members</a><a class="btn g" href="#episodes">Watch episodes</a></div>
+  <div class="btns" id="home-btns"><a class="btn" id="btn1" href="#members">Meet the members</a><a class="btn g" id="btn2" href="#episodes">Watch episodes</a></div>
+  <div class="home-extra" id="home-extra" hidden></div>
  </section>
- <section class="view" id="v-members" hidden><h2>Members</h2><div class="grid" id="mgrid"></div></section>
- <section class="view" id="v-episodes" hidden><h2>Episodes</h2>
+
+ <section class="view" id="v-members" hidden><h2 id="hd-members">Members</h2><div class="grid" id="mgrid"></div></section>
+
+ <section class="view" id="v-episodes" hidden><h2 id="hd-episodes">Episodes</h2>
   <div class="tools"><div id="chips" class="chips"></div>
   <select id="sort" aria-label="Sort episodes"><option value="new">Newest first</option><option value="old">Oldest first</option></select></div>
   <div id="eps"></div></section>
- <section class="view" id="v-news" hidden><h2>News &amp; Announcements</h2><div id="news"></div></section>
- <section class="view" id="v-story" hidden><h2>Story</h2><div id="story"></div></section>
+
+ <section class="view" id="v-news" hidden><h2 id="hd-news">News &amp; Announcements</h2><div id="news"></div></section>
+
+ <section class="view" id="v-story" hidden><h2 id="hd-story">Story</h2><div id="story"></div></section>
+
+ <!-- PRIVATE ADMIN DASHBOARD: #edits -->
+ <section class="view" id="v-edits" hidden>
+  <div id="ed-gate" class="ed-auth">
+   <span class="ed-badge">PRIVATE WORKSPACE</span>
+   <h2 style="margin-top:10px">EDITS</h2>
+   <p class="ed-sub">Authorised administrator portal for Fractured SMP.</p>
+   <div id="ed-msg" class="msg" hidden></div>
+
+   <div id="ed-auth-forms">
+    <div class="ed-tabs">
+     <button type="button" id="tab-login" class="on">Admin Sign In</button>
+     <button type="button" id="tab-reg">Redeem Invitation</button>
+    </div>
+
+    <form id="f-login">
+     <div class="fld"><label for="l-email">Administrator Email</label><input id="l-email" type="email" required autocomplete="email"></div>
+     <div class="fld"><label for="l-pass">Password</label><input id="l-pass" type="password" required autocomplete="current-password"></div>
+     <button class="btn" type="submit" style="width:100%">Sign in to EDITS</button>
+    </form>
+
+    <form id="f-reg" hidden>
+     <div class="fld"><label for="r-tok">Private Invitation Token</label><input id="r-tok" type="text" required placeholder="Paste your invitation token"></div>
+     <div class="fld"><label for="r-user">Admin Handle</label>
+      <select id="r-user">
+       <option value="EmberTrick">EmberTrick</option>
+       <option value="AshBlazeX">AshBlazeX</option>
+       <option value="SoulScreamX">SoulScreamX</option>
+       <option value="lizzy___">lizzy___</option>
+      </select>
+     </div>
+     <div class="fld"><label for="r-email">Email Address</label><input id="r-email" type="email" required autocomplete="email"></div>
+     <div class="fld"><label for="r-pass">Create Password (min 8 chars)</label><input id="r-pass" type="password" minlength="8" required autocomplete="new-password"></div>
+     <button class="btn" type="submit" style="width:100%">Create Account &amp; Send Verification</button>
+    </form>
+   </div>
+
+   <div id="ed-verify-box" hidden style="display:grid;gap:12px">
+    <p style="font-size:.95rem">Your account is signed in, or awaiting email confirmation. Once you click the verification link in your inbox, click below to activate your administrator role.</p>
+    <div class="fld"><label for="v-tok">Invitation Token</label><input id="v-tok" type="text" placeholder="Paste invitation token"></div>
+    <button type="button" id="btn-claim" class="btn" style="width:100%">Verify &amp; Activate Admin Access</button>
+    <button type="button" id="btn-gate-out" class="ebtn" style="width:100%">Sign Out</button>
+   </div>
+  </div>
+
+  <div id="ed-panel" class="ed-shell" hidden>
+   <div class="ed-head">
+    <div class="ed-title">
+     <span class="ed-badge">EDITS</span>
+     <div>
+      <strong style="font-family:var(--hd);font-size:1.25rem">Fractured SMP Control Center</strong>
+      <div style="font-size:.82rem;color:var(--mu)">All 4 administrators share equal full-site permissions</div>
+     </div>
+    </div>
+    <div class="ed-user">
+     <span id="ed-who"></span>
+     <button type="button" class="ebtn" id="btn-preview-site">Preview Public Site</button>
+     <button type="button" class="ebtn" id="btn-logout">Sign Out</button>
+    </div>
+   </div>
+
+   <div class="ed-nav" id="ed-nav">
+    <button type="button" data-sec="site" class="on">Homepage &amp; Appearance <span class="dot" id="dot-site" hidden></span></button>
+    <button type="button" data-sec="members">Members <span class="dot" id="dot-members" hidden></span></button>
+    <button type="button" data-sec="episodes">Episodes <span class="dot" id="dot-episodes" hidden></span></button>
+    <button type="button" data-sec="news">News <span class="dot" id="dot-news" hidden></span></button>
+    <button type="button" data-sec="story">Story <span class="dot" id="dot-story" hidden></span></button>
+    <button type="button" data-sec="history">History &amp; Restore</button>
+    <button type="button" data-sec="invites">Admins &amp; Invites</button>
+   </div>
+
+   <div id="ed-toast" class="msg" hidden></div>
+
+   <div class="ed-wf" id="ed-wf">
+    <div class="ed-wf-status" id="ed-wf-status">Editing: <b>Homepage &amp; Appearance</b></div>
+    <div class="ed-wf-btns">
+     <button type="button" class="ebtn pri" id="btn-save-draft">Save Draft</button>
+     <button type="button" class="ebtn" id="btn-toggle-pv">Preview Draft on Site</button>
+     <button type="button" class="ebtn pub" id="btn-publish">Publish to Live Site</button>
+     <button type="button" class="ebtn dng" id="btn-discard">Discard Draft</button>
+    </div>
+   </div>
+
+   <div id="ed-body"></div>
+  </div>
+ </section>
 </main>
-<footer>Unofficial fan-made server website</footer>
+
+<div class="pv-banner" id="pv-banner" hidden>
+ <b>DRAFT PREVIEW MODE</b>
+ <span>Viewing unpublished changes</span>
+ <button type="button" class="ebtn pri" id="pv-back">Return to EDITS</button>
+ <button type="button" class="ebtn" id="pv-exit">Exit Preview</button>
+</div>
+
+<footer id="site-footer">Unofficial fan-made server website</footer>
 <div class="md" id="md" hidden><div class="box" role="dialog" aria-modal="true"><button class="x" aria-label="Close">×</button><div id="mb"></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// Paste your Supabase project URL and anon key. The anon key is public by design; Row Level Security protects the data.
-const CFG={url:'',key:''};
-const $=i=>document.getElementById(i);
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const ok=u=>/^(https?:\/\/|assets\/)[^\s"'()<>\\]+$/.test(u||'');
-const U=u=>ok(u)?esc(u):'';
-const C=c=>/^#[0-9a-f]{3,8}$/i.test(c||'')?c:'#ff6a3d';
-const fmt=d=>d?new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}):'';
-const yid=u=>((u||'').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/)||[])[1]||'';
-const EM=['🔥','💜','👍','😮','😂'];
-// Defaults: used until the database answers (or if it is not configured). Admins replace these via the database.
-const D={
- site:{tagline:'Every world has a breaking point.',sub:'One world. Different perspectives.',bg:''},
- members:[
-  {id:'embertrick',name:'EmberTrick',pvp:'Spear Mace',pvp2:'Sword',pers:'Sometimes calm, fast, fierce, empathetic, kind, strong and law-abiding.',info:'-',pic:'',c:'#ff6a3d'},
-  {id:'ashblazex',name:'AshBlazeX',pvp:'Sword',pvp2:'TNT Minecart',pers:'Fierce, strong, powerful, not law-abiding and does anything for power.',info:'-',pic:'',c:'#8f9bb3'},
-  {id:'soulscreamx',name:'SoulScreamX',pvp:'TNT Minecart',pvp2:'Sword',pers:'Kind, calm, decent, not the best at PvP and enjoys exploring.',info:'-',pic:'',c:'#3aa0ff'},
-  {id:'lizzy',name:'lizzy___',pvp:'-',pvp2:'-',pers:'Intelligent and strategical.',info:'-',pic:'',c:'#f5f7ff'}],
- episodes:[],  // {id,title,date,players:[memberId],yt,thumb}
- news:[],      // {id,title,body,img,date}
- story:[]      // {title,body}: stays empty until admins add approved chapters
+// ============================================================================
+// SUPABASE CONFIGURATION
+// Paste your Supabase Project URL and public "anon" key below.
+// Never place your service_role key in this file.
+// ============================================================================
+const CFG = {
+  url: 'https://ghqeptclxgxbirzrumla.supabase.co',
+  key: 'sb_publishable_Q3lE8qdkZOvShk_f-toFow_yo726KsP'
 };
-const S={p:'',o:'new'};
-let RC={},mine={},uid;
-try{mine=JSON.parse(localStorage.fm||'{}')}catch(e){}
-try{uid=localStorage.fv||(localStorage.fv=crypto.randomUUID())}catch(e){uid=crypto.randomUUID()}
-const api=(p,o={})=>fetch(CFG.url+'/rest/v1/'+p,{...o,headers:{apikey:CFG.key,Authorization:'Bearer '+CFG.key,'Content-Type':'application/json'}});
-const rpc=(f,b)=>api('rpc/'+f,{method:'POST',body:JSON.stringify(b||{})});
-async function load(){
- if(!CFG.url)return;
- try{
-  (await(await api('content_published?select=key,data')).json()).forEach(r=>{D[r.key]=r.data});
-  RC={};(await(await rpc('get_reactions')).json()).forEach(r=>{(RC[r.post_id]=RC[r.post_id]||{})[r.emoji]=r.n});
- }catch(e){}
-}
-function renderHome(){
- $('tag').textContent=D.site.tagline||'';$('sub').textContent=D.site.sub||'';
- $('bgi').style.backgroundImage=ok(D.site.bg)?`url(${D.site.bg})`:'';
-}
-function renderMembers(){
- $('mgrid').innerHTML=D.members.map((m,i)=>`<button class="card" data-i="${i}" style="--c:${C(m.c)};${U(m.pic)?`background-image:url(${U(m.pic)})`:''}"><span>${esc(m.name)}</span></button>`).join('');
-}
-function renderEps(){
- const nm=id=>(D.members.find(m=>m.id===id)||{}).name;
- $('chips').innerHTML=[{id:'',name:'All'}].concat(D.members).map(m=>`<button class="chip${S.p===m.id?' on':''}" data-p="${esc(m.id)}">${esc(m.name)}</button>`).join('');
- const l=D.episodes.filter(e=>!S.p||(e.players||[]).includes(S.p)).sort((a,b)=>(new Date(b.date)-new Date(a.date))*(S.o==='old'?-1:1));
- $('eps').innerHTML=l.length?l.map(e=>{
-  const t=U(e.thumb)||(yid(e.yt)?`https://img.youtube.com/vi/${yid(e.yt)}/hqdefault.jpg`:'');
-  return `<button class="ep" data-id="${esc(e.id)}">${t?`<img src="${t}" alt="" loading="lazy">`:'<i></i>'}<span><b>${esc(e.title)}</b><time>${fmt(e.date)}</time><small>${(e.players||[]).map(nm).filter(Boolean).map(esc).join(', ')}</small></span></button>`;
- }).join(''):'<p class="empty">No episodes here yet.</p>';
-}
-function renderNews(){
- const l=[...D.news].sort((a,b)=>new Date(b.date)-new Date(a.date));
- $('news').innerHTML=l.length?l.map(n=>`<article class="post">${U(n.img)?`<img src="${U(n.img)}" alt="">`:''}<h3>${esc(n.title)}</h3><time>${fmt(n.date)}</time><p>${esc(n.body)}</p><div class="rx">${EM.map(e=>`<button data-p="${esc(n.id)}" data-e="${e}" class="${mine[n.id+'|'+e]?'on':''}">${e} <span>${(RC[n.id]||{})[e]||0}</span></button>`).join('')}</div></article>`).join(''):'<p class="empty">No announcements yet.</p>';
-}
-function renderStory(){
- $('story').innerHTML=D.story.length?D.story.map(s=>`<article><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p></article>`).join(''):'<p class="empty">The story is still being written. Chapters will appear here as they are released.</p>';
-}
-const renderAll=()=>{renderHome();renderMembers();renderEps();renderNews();renderStory()};
-function react(p,e){
- const k=p+'|'+e,on=!mine[k];
- on?mine[k]=1:delete mine[k];
- const c=RC[p]=RC[p]||{};c[e]=Math.max(0,(c[e]||0)+(on?1:-1));
- try{localStorage.fm=JSON.stringify(mine)}catch(x){}
- renderNews();
- if(CFG.url)rpc('react',{p_post:p,p_emoji:e,p_visitor:uid,p_on:on}).catch(()=>{});
-}
-function openM(h,bg,c){
- const m=$('md');
- m.firstElementChild.style.setProperty('--c',c||'#ffffff33');
- m.firstElementChild.style.backgroundImage=ok(bg)?`url(${bg})`:'';
- $('mb').innerHTML=h;m.hidden=false;document.body.style.overflow='hidden';m.querySelector('.x').focus();
-}
-function closeM(){$('md').hidden=true;$('mb').innerHTML='';document.body.style.overflow=''}
-function play(e){
- if(!e)return;
- const id=yid(e.yt),t=U(e.thumb)||(id?`https://img.youtube.com/vi/${id}/hqdefault.jpg`:'');
- openM(`<div class="in vp"><h2>${esc(e.title)}</h2><div class="pl" id="pl"${t?` style="background-image:url(${t})"`:''}></div><div class="bar"><button id="w1">Watch here</button><a href="${U(e.yt)}" target="_blank" rel="noopener">Watch on YouTube</a><button id="fs">Fullscreen</button></div></div>`);
- const here=()=>{if(id&&!$('pl').querySelector('iframe'))$('pl').innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="${esc(e.title)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`};
- $('w1').onclick=here;
- $('fs').onclick=()=>{here();const p=$('pl');(p.requestFullscreen||p.webkitRequestFullscreen||(()=>{})).call(p)};
-}
-const row=(k,v)=>`<dt>${k}</dt><dd>${esc(v||'-')}</dd>`;
-$('mgrid').onclick=e=>{
- const b=e.target.closest('.card');if(!b)return;const m=D.members[b.dataset.i];
- openM(`<div class="in"><h2>${esc(m.name)}</h2><dl>${row('PvP method',m.pvp)+row('2nd PvP method',m.pvp2)+row('Personality',m.pers)+row('Special info',m.info)}</dl></div>`,m.pic,C(m.c));
+
+const isConfigured = CFG.url.startsWith('http') && CFG.key.length > 20;
+const sb = isConfigured ? window.supabase.createClient(CFG.url, CFG.key) : null;
+
+const $ = i => document.getElementById(i);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ok = u => /^(https?:\/\/|assets\/)[^\s"'()<>\x5c]+$/.test(u || '');
+const U = u => ok(u) ? esc(u) : '';
+const C = c => /^#[0-9a-f]{3,8}$/i.test(c || '') ? c : '#a855f7';
+const fmt = d => d ? new Date(d).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'}) : '';
+const fmtDT = d => d ? new Date(d).toLocaleString(undefined, {year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
+const yid = u => ((u || '').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/) || [])[1] || '';
+const EM = ['🔥', '💜', '👍', '😮', '😂'];
+
+const THEMES = {
+  fractured: {label:'Fractured Void (Default)', bg:'#090710', panel:'#14101f', ac:'#a855f7', n1:'#4a2478', n2:'#24103f'},
+  abyssal:   {label:'Abyssal Amethyst',         bg:'#07050e', panel:'#130d24', ac:'#b85cff', n1:'#581c87', n2:'#311042'},
+  crimson:   {label:'Crimson Eclipse',          bg:'#0b0509', panel:'#1a0e16', ac:'#f43f5e', n1:'#4c1d95', n2:'#881337'},
+  astral:    {label:'Astral Rift',              bg:'#060812', panel:'#0f1426', ac:'#38bdf8', n1:'#3b0764', n2:'#0c4a6e'}
 };
-$('chips').onclick=e=>{const b=e.target.closest('.chip');if(b){S.p=b.dataset.p;renderEps()}};
-$('sort').onchange=e=>{S.o=e.target.value;renderEps()};
-$('eps').onclick=e=>{const b=e.target.closest('.ep');if(b)play(D.episodes.find(x=>String(x.id)===b.dataset.id))};
-$('news').onclick=e=>{const b=e.target.closest('.rx button');if(b)react(b.dataset.p,b.dataset.e)};
-$('md').onclick=e=>{if(e.target===$('md')||e.target.closest('.x'))closeM()};
-const nav=o=>{document.body.classList.toggle('open',o);$('nav').inert=!o;$('burger').setAttribute('aria-expanded',o)};
-$('burger').onclick=()=>nav(!document.body.classList.contains('open'));
-$('scrim').onclick=()=>nav(false);
-addEventListener('keydown',e=>{if(e.key==='Escape'){closeM();nav(false)}});
-function route(){
- const n=(location.hash||'#home').slice(1),v=$('v-'+n)?n:'home';
- document.querySelectorAll('.view').forEach(s=>s.hidden=s.id!=='v-'+v);
- nav(false);scrollTo(0,0);
+
+const FONTS = {
+  cinzel:   {label:'Cinzel + Manrope (Default)', hd:"'Cinzel',Georgia,serif", bd:"'Manrope',system-ui,sans-serif"},
+  orbitron: {label:'Orbitron + Rajdhani (Sci-Fi)', hd:"'Orbitron',sans-serif", bd:"'Rajdhani',sans-serif"},
+  playfair: {label:'Playfair + Inter (Editorial)', hd:"'Playfair Display',Georgia,serif", bd:"'Inter',system-ui,sans-serif"}
+};
+
+const DEFAULT_DATA = {
+  site: {
+    title: 'FRACTURED SMP',
+    tagline: 'Every world has a breaking point.',
+    sub: 'One world. Different perspectives.',
+    extraText: '',
+    btn1Text: 'Meet the members',
+    btn1Link: '#members',
+    btn2Text: 'Watch episodes',
+    btn2Link: '#episodes',
+    showStoryBtn: false,
+    logo: 'assets/logo.jpg',
+    bg: '',
+    theme: 'fractured',
+    accent: '#a855f7',
+    font: 'cinzel',
+    effects: 'embers',
+    homeLayout: 'center',
+    memberLayout: 'cards',
+    footer: 'Unofficial fan-made server website'
+  },
+  members: [
+    {id:'embertrick', name:'EmberTrick', pvp:'Spear Mace', pvp2:'Sword', pers:'Sometimes calm, fast, fierce, empathetic, kind, strong and law-abiding.', info:'-', pic:'', c:'#a855f7'},
+    {id:'ashblazex', name:'AshBlazeX', pvp:'Sword', pvp2:'TNT Minecart', pers:'Fierce, strong, powerful, not law-abiding and does anything for power.', info:'-', pic:'', c:'#8f9bb3'},
+    {id:'soulscreamx', name:'SoulScreamX', pvp:'TNT Minecart', pvp2:'Sword', pers:'Kind, calm, decent, not the best at PvP and enjoys exploring.', info:'-', pic:'', c:'#3aa0ff'},
+    {id:'lizzy', name:'lizzy___', pvp:'-', pvp2:'-', pers:'Intelligent and strategical.', info:'-', pic:'', c:'#f5f7ff'}
+  ],
+  episodes: [],
+  news: [],
+  story: []
+};
+
+const clone = o => JSON.parse(JSON.stringify(o));
+
+// Published state (what public visitors see)
+let PUB = clone(DEFAULT_DATA);
+// Shared server drafts (key -> data)
+let SERVER_DRAFTS = {};
+// Local working copy inside EDITS
+let WORK = clone(DEFAULT_DATA);
+// Whether live preview mode is active
+let PREVIEW_ON = false;
+
+const S = {p:'', o:'new'};
+let RC = {}, mine = {};
+try { mine = JSON.parse(localStorage.fm || '{}'); } catch (e) {}
+// Reactions use a Supabase-issued anonymous auth user ID, never a browser-chosen UUID.
+
+const activeData = key => PREVIEW_ON ? WORK[key] : PUB[key];
+
+// ============================================================================
+// PUBLIC DATA LOADING & RENDERING
+// ============================================================================
+async function loadPublic() {
+  if (!sb) return;
+  try {
+    const {data: rows} = await sb.from('content_published').select('key, data');
+    if (rows) {
+      rows.forEach(r => {
+        if (r.key === 'site') PUB.site = {...DEFAULT_DATA.site, ...r.data};
+        else if (Array.isArray(r.data)) PUB[r.key] = r.data;
+      });
+    }
+    const {data: rx} = await sb.rpc('get_reactions');
+    RC = {};
+    if (rx) rx.forEach(r => { (RC[r.post_id] = RC[r.post_id] || {})[r.emoji] = r.n; });
+  } catch (e) {}
 }
-// Ember particles (static when the visitor prefers reduced motion)
-const cv=$('fx'),cx=cv.getContext('2d'),P=[];let W,H;
-const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};addEventListener('resize',rs);rs();
-for(let i=0;i<60;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,v:Math.random()*.5+.15,d:Math.random()*6});
-function f(t){
- cx.clearRect(0,0,W,H);cx.shadowBlur=8;cx.shadowColor='#ff6a3d';
- for(const p of P){p.y-=p.v;p.x+=Math.sin(t/1500+p.d)*.3;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}
-  cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle=`rgba(255,${120+p.d*15|0},70,${.25+p.r/4})`;cx.fill()}
- if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(f);
+
+function applyAppearance(site) {
+  const s = {...DEFAULT_DATA.site, ...(site || {})};
+  const th = THEMES[s.theme] || THEMES.fractured;
+  const fn = FONTS[s.font] || FONTS.cinzel;
+  const ac = C(s.accent || th.ac);
+  const r = document.documentElement.style;
+  r.setProperty('--bg', th.bg);
+  r.setProperty('--panel', th.panel);
+  r.setProperty('--ac', ac);
+  r.setProperty('--nebula1', th.n1);
+  r.setProperty('--nebula2', th.n2);
+  r.setProperty('--hd', fn.hd);
+  r.setProperty('--bd', fn.bd);
+
+  document.body.classList.toggle('fx-none', s.effects === 'none');
+  $('bgi').style.backgroundImage = ok(s.bg) ? `url(${s.bg})` : '';
+}
+
+function renderHome() {
+  const s = {...DEFAULT_DATA.site, ...activeData('site')};
+  applyAppearance(s);
+  $('home-title').textContent = s.title || 'FRACTURED SMP';
+  $('tag').textContent = s.tagline || '';
+  $('sub').textContent = s.sub || '';
+  $('site-footer').textContent = s.footer || 'Unofficial fan-made server website';
+
+  const logoSrc = ok(s.logo) ? s.logo : 'assets/logo.jpg';
+  $('home-logo').src = logoSrc;
+  document.querySelector('.brand img').src = logoSrc;
+
+  $('v-home').classList.toggle('layout-left', s.homeLayout === 'left');
+
+  const b1 = $('btn1'), b2 = $('btn2');
+  b1.textContent = s.btn1Text || 'Meet the members';
+  b1.href = s.btn1Link || '#members';
+  b2.textContent = s.btn2Text || 'Watch episodes';
+  b2.href = s.btn2Link || '#episodes';
+
+  const extra = $('home-extra');
+  if (s.extraText && s.extraText.trim()) {
+    extra.textContent = s.extraText;
+    extra.hidden = false;
+  } else {
+    extra.hidden = true;
+  }
+}
+
+function renderMembers() {
+  const s = activeData('site') || {};
+  const list = activeData('members') || [];
+  const grid = $('mgrid');
+  grid.classList.toggle('layout-wide', s.memberLayout === 'wide');
+  grid.innerHTML = list.map((m, i) => `
+    <button class="card" data-i="${i}" style="--c:${C(m.c)};${U(m.pic) ? `background-image:url(${U(m.pic)})` : ''}">
+      <span>${esc(m.name)}</span>
+    </button>
+  `).join('');
+}
+
+function renderEps() {
+  const members = activeData('members') || [];
+  const episodes = activeData('episodes') || [];
+  const nm = id => (members.find(m => m.id === id) || {}).name;
+
+  $('chips').innerHTML = [{id:'', name:'All'}].concat(members).map(m =>
+    `<button class="chip${S.p === m.id ? ' on' : ''}" data-p="${esc(m.id)}">${esc(m.name)}</button>`
+  ).join('');
+
+  const filtered = episodes
+    .filter(e => !S.p || (e.players || []).includes(S.p))
+    .sort((a, b) => {
+      const diff = (new Date(b.date || 0) - new Date(a.date || 0)) * (S.o === 'old' ? -1 : 1);
+      if (diff !== 0) return diff;
+      return ((a.order ?? 999) - (b.order ?? 999)) * (S.o === 'old' ? -1 : 1);
+    });
+
+  $('eps').innerHTML = filtered.length ? filtered.map(e => {
+    const t = U(e.thumb) || (yid(e.yt) ? `https://img.youtube.com/vi/${yid(e.yt)}/hqdefault.jpg` : '');
+    return `<button class="ep" data-id="${esc(e.id)}">${t ? `<img src="${t}" alt="" loading="lazy">` : '<i></i>'}<span><b>${esc(e.title)}</b><time>${fmt(e.date)}</time><small>${(e.players || []).map(nm).filter(Boolean).map(esc).join(', ')}</small></span></button>`;
+  }).join('') : '<p class="empty">No episodes here yet.</p>';
+}
+
+function renderNews() {
+  const list = [...(activeData('news') || [])].sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+  $('news').innerHTML = list.length ? list.map(n => `
+    <article class="post">
+      ${U(n.img) ? `<img src="${U(n.img)}" alt="">` : ''}
+      <h3>${esc(n.title)}</h3>
+      <time>${fmt(n.date)}</time>
+      <p>${esc(n.body)}</p>
+      <div class="rx">${EM.map(e => `<button data-p="${esc(n.id)}" data-e="${e}" class="${mine[n.id + '|' + e] ? 'on' : ''}">${e} <span>${(RC[n.id] || {})[e] || 0}</span></button>`).join('')}</div>
+    </article>
+  `).join('') : '<p class="empty">No announcements yet.</p>';
+}
+
+function renderStory() {
+  const list = activeData('story') || [];
+  $('story').innerHTML = list.length ? list.map(s => `<article><h3>${esc(s.title)}</h3><p>${esc(s.body)}</p></article>`).join('') : '<p class="empty">The story is still being written. Chapters will appear here as they are released.</p>';
+}
+
+const renderAll = () => {
+  renderHome();
+  renderMembers();
+  renderEps();
+  renderNews();
+  renderStory();
+  $('pv-banner').hidden = !PREVIEW_ON;
+};
+
+async function react(p, e) {
+  if (!sb) return;
+  const k = p + '|' + e, on = !mine[k];
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { showMsg('ed-msg', 'Reactions are temporarily unavailable. Please refresh and try again.', 'err'); return; }
+  const previous = !!mine[k];
+  on ? mine[k] = 1 : delete mine[k];
+  const c = RC[p] = RC[p] || {};
+  c[e] = Math.max(0, (c[e] || 0) + (on ? 1 : -1));
+  try { localStorage.fm = JSON.stringify(mine); } catch (x) {}
+  renderNews();
+  const { error } = await sb.rpc('react', {p_post: p, p_emoji: e, p_on: on});
+  if (error) { if (previous) mine[k] = 1; else delete mine[k]; c[e] = Math.max(0, (c[e] || 0) + (on ? -1 : 1)); renderNews(); showMsg('ed-msg', 'Could not save reaction. Please try again.', 'err'); return; }
+  const { data: rx } = await sb.rpc('get_reactions');
+  if (rx) { RC = {}; rx.forEach(r => { (RC[r.post_id] = RC[r.post_id] || {})[r.emoji] = r.n; }); renderNews(); }
+}
+
+function openM(h, bg, c) {
+  const m = $('md');
+  m.firstElementChild.style.setProperty('--c', c || '#ffffff33');
+  m.firstElementChild.style.backgroundImage = ok(bg) ? `url(${bg})` : '';
+  $('mb').innerHTML = h;
+  m.hidden = false;
+  document.body.style.overflow = 'hidden';
+  m.querySelector('.x').focus();
+}
+function closeM() { $('md').hidden = true; $('mb').innerHTML = ''; document.body.style.overflow = ''; }
+
+function play(e) {
+  if (!e) return;
+  const id = yid(e.yt), t = U(e.thumb) || (id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : '');
+  openM(`<div class="in vp"><h2>${esc(e.title)}</h2><div class="pl" id="pl"${t ? ` style="background-image:url(${t})"` : ''}></div><div class="bar"><button id="w1">Watch here</button><a href="${U(e.yt)}" target="_blank" rel="noopener">Watch on YouTube</a><button id="fs">Fullscreen</button></div></div>`);
+  const here = () => { if (id && !$('pl').querySelector('iframe')) $('pl').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="${esc(e.title)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`; };
+  $('w1').onclick = here;
+  $('fs').onclick = () => { here(); const p = $('pl'); (p.requestFullscreen || p.webkitRequestFullscreen || (() => {})).call(p); };
+}
+
+const row = (k, v) => `<dt>${k}</dt><dd>${esc(v || '-')}</dd>`;
+$('mgrid').onclick = e => {
+  const b = e.target.closest('.card'); if (!b) return;
+  const m = (activeData('members') || [])[b.dataset.i]; if (!m) return;
+  openM(`<div class="in"><h2>${esc(m.name)}</h2><dl>${row('PvP method', m.pvp) + row('2nd PvP method', m.pvp2) + row('Personality', m.pers) + row('Special info', m.info)}</dl></div>`, m.pic, C(m.c));
+};
+$('chips').onclick = e => { const b = e.target.closest('.chip'); if (b) { S.p = b.dataset.p; renderEps(); } };
+$('sort').onchange = e => { S.o = e.target.value; renderEps(); };
+$('eps').onclick = e => { const b = e.target.closest('.ep'); if (b) play((activeData('episodes') || []).find(x => String(x.id) === b.dataset.id)); };
+$('news').onclick = e => { const b = e.target.closest('.rx button'); if (b) react(b.dataset.p, b.dataset.e); };
+$('md').onclick = e => { if (e.target === $('md') || e.target.closest('.x')) closeM(); };
+
+const nav = o => { document.body.classList.toggle('open', o); $('nav').inert = !o; $('burger').setAttribute('aria-expanded', o); };
+$('burger').onclick = () => nav(!document.body.classList.contains('open'));
+$('scrim').onclick = () => nav(false);
+addEventListener('keydown', e => { if (e.key === 'Escape') { closeM(); nav(false); } });
+
+// ============================================================================
+// PRIVATE EDITS DASHBOARD STATE & LOGIC
+// ============================================================================
+const ED = {
+  user: null,
+  isAdmin: false,
+  sec: 'site',
+  dirty: {site:false, members:false, episodes:false, news:false, story:false},
+  history: [],
+  admins: [],
+  invites: []
+};
+
+function showMsg(elId, text, type = '') {
+  const el = $(elId);
+  if (!text) { el.hidden = true; return; }
+  el.textContent = text;
+  el.className = 'msg' + (type ? ' ' + type : '');
+  el.hidden = false;
+}
+
+function getInviteTokenFromUrl() {
+  const h = location.hash || '';
+  const qIdx = h.indexOf('?');
+  if (qIdx !== -1) {
+    const p = new URLSearchParams(h.slice(qIdx + 1));
+    if (p.get('invite')) return p.get('invite');
+  }
+  const sp = new URLSearchParams(location.search);
+  return sp.get('invite') || '';
+}
+
+async function checkAdminSession() {
+  if (!sb) {
+    showMsg('ed-msg', 'Supabase is not configured yet. Add your Supabase URL and Anon Key in index.html.', 'err');
+    return;
+  }
+  const {data: {session}} = await sb.auth.getSession();
+  ED.user = session?.user || null;
+  ED.isAdmin = false;
+
+  const urlTok = getInviteTokenFromUrl();
+  if (urlTok) {
+    $('r-tok').value = urlTok;
+    $('v-tok').value = urlTok;
+    switchAuthTab('reg');
+  }
+
+  if (ED.user) {
+    const {data: okAdmin} = await sb.rpc('is_admin');
+    ED.isAdmin = !!okAdmin;
+
+    // Auto-claim if user just verified email and has a token stored/in URL
+    const pendingTok = urlTok || localStorage.getItem('fsmp_pending_invite') || '';
+    if (!ED.isAdmin && pendingTok) {
+      try {
+        const {error} = await sb.rpc('claim_invite', {
+          p_token: pendingTok,
+          p_username: ED.user.user_metadata?.username || ''
+        });
+        if (!error) {
+          localStorage.removeItem('fsmp_pending_invite');
+          ED.isAdmin = true;
+        }
+      } catch (e) {}
+    }
+  }
+
+  updateEditsGate();
+}
+
+async function updateEditsGate() {
+  if (ED.user && ED.isAdmin) {
+    $('ed-gate').hidden = true;
+    $('ed-panel').hidden = false;
+    const handle = ED.user.user_metadata?.username || ED.user.email;
+    $('ed-who').textContent = `Signed in as ${handle}`;
+    await syncAdminData();
+    renderEditor();
+  } else if (ED.user && !ED.isAdmin) {
+    $('ed-gate').hidden = false;
+    $('ed-panel').hidden = true;
+    $('ed-auth-forms').hidden = true;
+    $('ed-verify-box').hidden = false;
+    showMsg('ed-msg', `Signed in as ${ED.user.email}. Complete email verification and claim your invitation token below.`, '');
+  } else {
+    $('ed-gate').hidden = false;
+    $('ed-panel').hidden = true;
+    $('ed-auth-forms').hidden = false;
+    $('ed-verify-box').hidden = true;
+  }
+}
+
+async function syncAdminData() {
+  if (!sb || !ED.isAdmin) return;
+  await loadPublic();
+
+  // Load shared drafts from database
+  const {data: drafts} = await sb.from('content_drafts').select('*');
+  SERVER_DRAFTS = {};
+  (drafts || []).forEach(d => { SERVER_DRAFTS[d.key] = d; });
+
+  ['site', 'members', 'episodes', 'news', 'story'].forEach(k => {
+    if (SERVER_DRAFTS[k]) {
+      WORK[k] = k === 'site' ? {...DEFAULT_DATA.site, ...SERVER_DRAFTS[k].data} : clone(SERVER_DRAFTS[k].data);
+    } else {
+      WORK[k] = clone(PUB[k]);
+    }
+    ED.dirty[k] = false;
+  });
+
+  const {data: hist} = await sb.from('change_history').select('*').order('id', {ascending: false}).limit(50);
+  ED.history = hist || [];
+
+  const {data: admins} = await sb.from('admins').select('*').order('joined_at', {ascending: true});
+  ED.admins = admins || [];
+
+  const {data: invites} = await sb.from('invitations').select('*').order('created_at', {ascending: false});
+  ED.invites = invites || [];
+
+  refreshBadges();
+}
+
+function refreshBadges() {
+  ['site', 'members', 'episodes', 'news', 'story'].forEach(k => {
+    const hasDraft = !!SERVER_DRAFTS[k] || ED.dirty[k];
+    $('dot-' + k).hidden = !hasDraft;
+  });
+
+  const isContentTab = ['site', 'members', 'episodes', 'news', 'story'].includes(ED.sec);
+  $('ed-wf').hidden = !isContentTab;
+  if (isContentTab) {
+    const labels = {site:'Homepage & Appearance', members:'Members', episodes:'Episodes', news:'News & Announcements', story:'Story'};
+    const srv = SERVER_DRAFTS[ED.sec];
+    let st = `Section: <b>${labels[ED.sec]}</b> — `;
+    if (ED.dirty[ED.sec]) st += `<span style="color:#fcd34d">Unsaved local edits</span>`;
+    else if (srv) st += `<span style="color:#86efac">Shared draft saved (${fmtDT(srv.updated_at)} by ${esc(srv.updated_email || 'admin')})</span>`;
+    else st += `<span style="color:var(--mu)">Matches live published version</span>`;
+    $('ed-wf-status').innerHTML = st;
+
+    $('btn-publish').disabled = !srv && !ED.dirty[ED.sec];
+    $('btn-discard').disabled = !srv && !ED.dirty[ED.sec];
+    $('btn-toggle-pv').textContent = PREVIEW_ON ? 'Disable Draft Preview' : 'Preview Draft on Site';
+  }
+}
+
+// Media Upload to Supabase Storage
+async function uploadImage(file, folder = 'uploads') {
+  if (!sb || !ED.isAdmin) throw new Error('Not authorised');
+  if (!file) throw new Error('No file chosen');
+  if (file.size > 5 * 1024 * 1024) throw new Error('Image must be under 5MB');
+  const ext = (file.name.split('.').pop() || 'png').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const path = `${folder}/${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext}`;
+  const {error} = await sb.storage.from('media').upload(path, file, {upsert: false});
+  if (error) throw error;
+  const {data} = sb.storage.from('media').getPublicUrl(path);
+  return data.publicUrl;
+}
+
+// ============================================================================
+// EDITS SECTION RENDERERS (Every control is live and functional)
+// ============================================================================
+function renderEditor() {
+  refreshBadges();
+  const box = $('ed-body');
+  const sec = ED.sec;
+
+  if (sec === 'site') {
+    const s = WORK.site;
+    box.innerHTML = `
+      <div class="ed-card">
+        <h3>Homepage Content &amp; Buttons</h3>
+        <div class="ed-grid2">
+          <div class="fld"><label>Server Title</label><input data-f="title" value="${esc(s.title)}"></div>
+          <div class="fld"><label>Primary Tagline</label><input data-f="tagline" value="${esc(s.tagline)}"></div>
+          <div class="fld"><label>Subtitle</label><input data-f="sub" value="${esc(s.sub)}"></div>
+          <div class="fld"><label>Footer Text</label><input data-f="footer" value="${esc(s.footer)}"></div>
+          <div class="fld"><label>Primary Button Text</label><input data-f="btn1Text" value="${esc(s.btn1Text)}"></div>
+          <div class="fld"><label>Primary Button Link</label><input data-f="btn1Link" value="${esc(s.btn1Link)}"></div>
+          <div class="fld"><label>Secondary Button Text</label><input data-f="btn2Text" value="${esc(s.btn2Text)}"></div>
+          <div class="fld"><label>Secondary Button Link</label><input data-f="btn2Link" value="${esc(s.btn2Link)}"></div>
+        </div>
+        <div class="fld"><label>Optional Homepage Announcement / Intro Block (Leave blank to hide)</label><textarea rows="3" data-f="extraText">${esc(s.extraText || '')}</textarea></div>
+      </div>
+
+      <div class="ed-card">
+        <h3>Website Appearance, Theme, Fonts &amp; Visual Effects</h3>
+        <div class="ed-grid2">
+          <div class="fld"><label>Colour Theme Preset</label>
+            <select data-f="theme">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}"${s.theme === k ? ' selected' : ''}>${v.label}</option>`).join('')}</select>
+          </div>
+          <div class="fld"><label>Accent Glow Colour</label>
+            <input type="color" data-f="accent" value="${C(s.accent)}" style="height:44px;padding:4px">
+          </div>
+          <div class="fld"><label>Typography / Font Pair</label>
+            <select data-f="font">${Object.entries(FONTS).map(([k, v]) => `<option value="${k}"${s.font === k ? ' selected' : ''}>${v.label}</option>`).join('')}</select>
+          </div>
+          <div class="fld"><label>Ambient Visual Effects</label>
+            <select data-f="effects">
+              <option value="embers"${s.effects === 'embers' ? ' selected' : ''}>Ember Particles + Nebula Glow</option>
+              <option value="none"${s.effects === 'none' ? ' selected' : ''}>Minimal / Static Background</option>
+            </select>
+          </div>
+          <div class="fld"><label>Homepage Hero Layout</label>
+            <select data-f="homeLayout">
+              <option value="center"${s.homeLayout === 'center' ? ' selected' : ''}>Centered Cinematic Hero</option>
+              <option value="left"${s.homeLayout === 'left' ? ' selected' : ''}>Left-Aligned Editorial Hero</option>
+            </select>
+          </div>
+          <div class="fld"><label>Member Cards Layout</label>
+            <select data-f="memberLayout">
+              <option value="cards"${s.memberLayout === 'cards' ? ' selected' : ''}>Portrait Cards (4:5)</option>
+              <option value="wide"${s.memberLayout === 'wide' ? ' selected' : ''}>Widescreen Cards (16:10)</option>
+            </select>
+          </div>
+        </div>
+        <div class="fld"><label>Server Logo URL or Upload</label>
+          <div class="up-row"><input type="text" data-f="logo" value="${esc(s.logo || 'assets/logo.jpg')}"><label class="up-lbl">Upload Logo<input type="file" accept="image/*" data-up="logo"></label></div>
+        </div>
+        <div class="fld"><label>Global Background Image URL or Upload</label>
+          <div class="up-row"><input type="text" data-f="bg" value="${esc(s.bg || '')}" placeholder="https://..."><label class="up-lbl">Upload Background<input type="file" accept="image/*" data-up="bg"></label></div>
+        </div>
+      </div>
+    `;
+
+    box.querySelectorAll('[data-f]').forEach(el => {
+      el.oninput = () => {
+        WORK.site[el.dataset.f] = el.value;
+        if (el.dataset.f === 'theme' && THEMES[el.value]) {
+          WORK.site.accent = THEMES[el.value].ac;
+          const acInp = box.querySelector('[data-f="accent"]');
+          if (acInp) acInp.value = THEMES[el.value].ac;
+        }
+        ED.dirty.site = true;
+        refreshBadges();
+        if (PREVIEW_ON) renderAll();
+      };
+    });
+
+    box.querySelectorAll('[data-up]').forEach(inp => {
+      inp.onchange = async () => {
+        if (!inp.files[0]) return;
+        try {
+          showMsg('ed-toast', 'Uploading image...', '');
+          const url = await uploadImage(inp.files[0], 'site');
+          WORK.site[inp.dataset.up] = url;
+          ED.dirty.site = true;
+          showMsg('ed-toast', 'Image uploaded. Click Save Draft or Publish to apply.', 'ok');
+          renderEditor();
+          if (PREVIEW_ON) renderAll();
+        } catch (err) {
+          showMsg('ed-toast', err.message, 'err');
+        }
+      };
+    });
+  }
+
+  else if (sec === 'members') {
+    box.innerHTML = `
+      <div class="ed-card">
+        <div class="ed-item-head">
+          <h3>SMP Members (${WORK.members.length})</h3>
+          <button type="button" class="ebtn pri" id="add-member">+ Add Member</button>
+        </div>
+        ${WORK.members.map((m, i) => `
+          <div class="ed-item" data-idx="${i}">
+            <div class="ed-item-head">
+              <strong>#${i + 1} — ${esc(m.name || 'New Member')}</strong>
+              <button type="button" class="ebtn dng" data-del="${i}">Remove Member</button>
+            </div>
+            <div class="ed-grid2">
+              <div class="fld"><label>Member Name</label><input data-mf="name" value="${esc(m.name)}"></div>
+              <div class="fld"><label>Card Accent Colour</label><input type="color" data-mf="c" value="${C(m.c)}" style="height:44px;padding:4px"></div>
+              <div class="fld"><label>Primary PvP Method</label><input data-mf="pvp" value="${esc(m.pvp)}"></div>
+              <div class="fld"><label>Secondary PvP Method</label><input data-mf="pvp2" value="${esc(m.pvp2)}"></div>
+            </div>
+            <div class="fld"><label>Personality</label><textarea rows="2" data-mf="pers">${esc(m.pers)}</textarea></div>
+            <div class="fld"><label>Special Information</label><input data-mf="info" value="${esc(m.info)}"></div>
+            <div class="fld"><label>Profile Picture / Card Background</label>
+              <div class="up-row"><input type="text" data-mf="pic" value="${esc(m.pic || '')}" placeholder="https://..."><label class="up-lbl">Upload Image<input type="file" accept="image/*" data-mup="${i}"></label></div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    $('add-member').onclick = () => {
+      WORK.members.push({id:'member-' + Date.now(), name:'New Member', pvp:'Sword', pvp2:'-', pers:'-', info:'-', pic:'', c:'#a855f7'});
+      ED.dirty.members = true;
+      renderEditor();
+      if (PREVIEW_ON) renderAll();
+    };
+
+    box.querySelectorAll('[data-del]').forEach(b => {
+      b.onclick = () => {
+        WORK.members.splice(Number(b.dataset.del), 1);
+        ED.dirty.members = true;
+        renderEditor();
+        if (PREVIEW_ON) renderAll();
+      };
+    });
+
+    box.querySelectorAll('.ed-item').forEach(item => {
+      const idx = Number(item.dataset.idx);
+      item.querySelectorAll('[data-mf]').forEach(inp => {
+        inp.oninput = () => {
+          WORK.members[idx][inp.dataset.mf] = inp.value;
+          if (inp.dataset.mf === 'name' && !WORK.members[idx].id) {
+            WORK.members[idx].id = inp.value.toLowerCase().replace(/[^a-z0-9]/g, '') || ('m' + idx);
+          }
+          ED.dirty.members = true;
+          refreshBadges();
+          if (PREVIEW_ON) renderAll();
+        };
+      });
+    });
+
+    box.querySelectorAll('[data-mup]').forEach(inp => {
+      inp.onchange = async () => {
+        if (!inp.files[0]) return;
+        const idx = Number(inp.dataset.mup);
+        try {
+          showMsg('ed-toast', 'Uploading profile picture...', '');
+          const url = await uploadImage(inp.files[0], 'members');
+          WORK.members[idx].pic = url;
+          ED.dirty.members = true;
+          showMsg('ed-toast', 'Member image uploaded.', 'ok');
+          renderEditor();
+          if (PREVIEW_ON) renderAll();
+        } catch (err) {
+          showMsg('ed-toast', err.message, 'err');
+        }
+      };
+    });
+  }
+
+  else if (sec === 'episodes') {
+    const members = WORK.members;
+    box.innerHTML = `
+      <div class="ed-card">
+        <div class="ed-item-head">
+          <h3>Episodes (${WORK.episodes.length})</h3>
+          <button type="button" class="ebtn pri" id="add-ep">+ Add Episode</button>
+        </div>
+        ${WORK.episodes.length === 0 ? '<p class="empty">No episodes added yet. Click "+ Add Episode" above.</p>' : ''}
+        ${WORK.episodes.map((ep, i) => `
+          <div class="ed-item" data-idx="${i}">
+            <div class="ed-item-head">
+              <strong>Episode #${i + 1} — ${esc(ep.title || 'Untitled')}</strong>
+              <div style="display:flex;gap:6px">
+                <button type="button" class="ebtn" data-move="${i}:-1" ${i === 0 ? 'disabled' : ''}>↑</button>
+                <button type="button" class="ebtn" data-move="${i}:1" ${i === WORK.episodes.length - 1 ? 'disabled' : ''}>↓</button>
+                <button type="button" class="ebtn dng" data-del="${i}">Delete</button>
+              </div>
+            </div>
+            <div class="ed-grid2">
+              <div class="fld"><label>Episode Title</label><input data-ef="title" value="${esc(ep.title)}"></div>
+              <div class="fld"><label>Release Date</label><input type="date" data-ef="date" value="${esc(ep.date || '')}"></div>
+              <div class="fld"><label>YouTube Video URL</label><input data-ef="yt" value="${esc(ep.yt || '')}" placeholder="https://www.youtube.com/watch?v=..."></div>
+              <div class="fld"><label>Sort Priority (Lower = Higher)</label><input type="number" data-ef="order" value="${ep.order ?? i + 1}"></div>
+            </div>
+            <div class="fld"><label>Custom Thumbnail (Optional — auto-loads from YouTube if blank)</label>
+              <div class="up-row"><input type="text" data-ef="thumb" value="${esc(ep.thumb || '')}" placeholder="https://..."><label class="up-lbl">Upload Thumbnail<input type="file" accept="image/*" data-eup="${i}"></label></div>
+            </div>
+            <div class="fld"><label>Featured Players (Used for public filtering)</label>
+              <div class="chk-row">
+                ${members.map(m => `<label class="chk-pill"><input type="checkbox" data-ep-pl="${m.id}" ${(ep.players || []).includes(m.id) ? 'checked' : ''}> ${esc(m.name)}</label>`).join('')}
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    $('add-ep').onclick = () => {
+      WORK.episodes.unshift({
+        id: 'ep-' + Date.now(),
+        title: 'New Episode',
+        date: new Date().toISOString().slice(0, 10),
+        players: [],
+        yt: '',
+        thumb: '',
+        order: WORK.episodes.length + 1
+      });
+      ED.dirty.episodes = true;
+      renderEditor();
+      if (PREVIEW_ON) renderAll();
+    };
+
+    box.querySelectorAll('[data-del]').forEach(b => {
+      b.onclick = () => {
+        WORK.episodes.splice(Number(b.dataset.del), 1);
+        ED.dirty.episodes = true;
+        renderEditor();
+        if (PREVIEW_ON) renderAll();
+      };
+    });
+
+    box.querySelectorAll('[data-move]').forEach(b => {
+      b.onclick = () => {
+        const [idx, dir] = b.dataset.move.split(':').map(Number);
+        const target = idx + dir;
+        if (target < 0 || target >= WORK.episodes.length) return;
+        const [moved] = WORK.episodes.splice(idx, 1);
+        WORK.episodes.splice(target, 0, moved);
+        WORK.episodes.forEach((x, k) => { x.order = k + 1; });
+        ED.dirty.episodes = true;
+        renderEditor();
+        if (PREVIEW_ON) renderAll();
+      };
+    });
+
+    box.querySelectorAll('.ed-item').forEach(item => {
+      const idx = Number(item.dataset.idx);
+      item.querySelectorAll('[data-ef]').forEach(inp => {
+        inp.oninput = () => {
+          WORK.episodes[idx][inp.dataset.ef] = inp.dataset.ef === 'order' ? Number(inp.value) : inp.value;
+          ED.dirty.episodes = true;
+          refreshBadges();
+          if (PREVIEW_ON) renderAll();
+        };
+      });
+      item.querySelectorAll('[data-ep-pl]').forEach(chk => {
+        chk.onchange = () => {
+          const pid = chk.dataset.epPl;
+          const set = new Set(WORK.episodes[idx].players || []);
+          chk.checked ? set.add(pid) : set.delete(pid);
+          WORK.episodes[idx].players = [...set];
+          ED.dirty.episodes = true;
+          refreshBadges();
+          if (PREVIEW_ON) renderAll();
+        };
+      });
+    });
+
+    box.querySelectorAll('[data-eup]').forEach(inp => {
+      inp.onchange = async () => {
+        if (!inp.files[0]) return;
+        const idx = Number(inp.dataset.eup);
+        try {
+          showMsg('ed-toast', 'Uploading episode thumbnail...', '');
+          const url = await uploadImage(inp.files[0], 'episodes');
+          WORK.episodes[idx].thumb = url;
+          ED.dirty.episodes = true;
+          showMsg('ed-toast', 'Thumbnail uploaded.', 'ok');
+          renderEditor();
+          if (PREVIEW_ON) renderAll();
+        } catch (err) {
+          showMsg('ed-toast', err.message, 'err');
+        }
+      };
+    });
+  }
+
+  else if (sec === 'news') {
+    box.innerHTML = `
+      <div class="ed-card">
+        <div class="ed-item-head">
+          <h3>News &amp; Announcements (${WORK.news.length})</h3>
+          <button type="button" class="ebtn pri" id="add-news">+ New Announcement</button>
+        </div>
+        ${WORK.news.length === 0 ? '<p class="empty">No announcements yet. Click "+ New Announcement" to publish news.</p>' : ''}
+        ${WORK.news.map((n, i) => `
+          <div class="ed-item" data-idx="${i}">
+            <div class="ed-item-head">
+              <strong>${esc(n.title || 'Untitled Post')}</strong>
+              <button type="button" class="ebtn dng" data-del="${i}">Delete Post</button>
+            </div>
+            <div class="ed-grid2">
+              <div class="fld"><label>Headline</label><input data-nf="title" value="${esc(n.title)}"></div>
+              <div class="fld"><label>Date</label><input type="date" data-nf="date" value="${esc(n.date || '')}"></div>
+            </div>
+            <div class="fld"><label>Announcement Content</label><textarea rows="4" data-nf="body">${esc(n.body)}</textarea></div>
+            <div class="fld"><label>Banner Image (Optional)</label>
+              <div class="up-row"><input type="text" data-nf="img" value="${esc(n.img || '')}" placeholder="https://..."><label class="up-lbl">Upload Image<input type="file" accept="image/*" data-nup="${i}"></label></div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    $('add-news').onclick = () => {
+      WORK.news.unshift({
+        id: 'news-' + Date.now(),
+        title: 'Server Announcement',
+        date: new Date().toISOString().slice(0, 10),
+        body: '',
+        img: ''
+      });
+      ED.dirty.news = true;
+      renderEditor();
+      if (PREVIEW_ON) renderAll();
+    };
+
+    box.querySelectorAll('[data-del]').forEach(b => {
+      b.onclick = () => {
+        WORK.news.splice(Number(b.dataset.del), 1);
+        ED.dirty.news = true;
+        renderEditor();
+        if (PREVIEW_ON) renderAll();
+      };
+    });
+
+    box.querySelectorAll('.ed-item').forEach(item => {
+      const idx = Number(item.dataset.idx);
+      item.querySelectorAll('[data-nf]').forEach(inp => {
+        inp.oninput = () => {
+          WORK.news[idx][inp.dataset.nf] = inp.value;
+          ED.dirty.news = true;
+          refreshBadges();
+          if (PREVIEW_ON) renderAll();
+        };
+      });
+    });
+
+    box.querySelectorAll('[data-nup]').forEach(inp => {
+      inp.onchange = async () => {
+        if (!inp.files[0]) return;
+        const idx = Number(inp.dataset.nup);
+        try {
+          showMsg('ed-toast', 'Uploading news image...', '');
+          const url = await uploadImage(inp.files[0], 'news');
+          WORK.news[idx].img = url;
+          ED.dirty.news = true;
+          showMsg('ed-toast', 'News image uploaded.', 'ok');
+          renderEditor();
+          if (PREVIEW_ON) renderAll();
+        } catch (err) {
+          showMsg('ed-toast', err.message, 'err');
+        }
+      };
+    });
+  }
+
+  else if (sec === 'story') {
+    box.innerHTML = `
+      <div class="ed-card">
+        <div class="ed-item-head">
+          <h3>Story Chapters (${WORK.story.length})</h3>
+          <button type="button" class="ebtn pri" id="add-ch">+ Add Chapter</button>
+        </div>
+        ${WORK.story.length === 0 ? '<p class="empty">No chapters published yet.</p>' : ''}
+        ${WORK.story.map((ch, i) => `
+          <div class="ed-item" data-idx="${i}">
+            <div class="ed-item-head">
+              <strong>Chapter #${i + 1}</strong>
+              <button type="button" class="ebtn dng" data-del="${i}">Delete Chapter</button>
+            </div>
+            <div class="fld"><label>Chapter Title</label><input data-sf="title" value="${esc(ch.title)}"></div>
+            <div class="fld"><label>Chapter Text</label><textarea rows="5" data-sf="body">${esc(ch.body)}</textarea></div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    $('add-ch').onclick = () => {
+      WORK.story.push({title: 'Chapter ' + (WORK.story.length + 1), body: ''});
+      ED.dirty.story = true;
+      renderEditor();
+      if (PREVIEW_ON) renderAll();
+    };
+
+    box.querySelectorAll('[data-del]').forEach(b => {
+      b.onclick = () => {
+        WORK.story.splice(Number(b.dataset.del), 1);
+        ED.dirty.story = true;
+        renderEditor();
+        if (PREVIEW_ON) renderAll();
+      };
+    });
+
+    box.querySelectorAll('.ed-item').forEach(item => {
+      const idx = Number(item.dataset.idx);
+      item.querySelectorAll('[data-sf]').forEach(inp => {
+        inp.oninput = () => {
+          WORK.story[idx][inp.dataset.sf] = inp.value;
+          ED.dirty.story = true;
+          refreshBadges();
+          if (PREVIEW_ON) renderAll();
+        };
+      });
+    });
+  }
+
+  else if (sec === 'history') {
+    box.innerHTML = `
+      <div class="ed-card">
+        <h3>Change History &amp; Version Restore</h3>
+        <p style="color:var(--mu);font-size:.9rem">Every draft save, publish, discard, and restore is permanently recorded. Restoring a previous published version creates a new live version without erasing later history.</p>
+        ${ED.history.length === 0 ? '<p class="empty">No change history recorded yet.</p>' : ''}
+        ${ED.history.map(h => `
+          <div class="hist-row">
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span class="tag-act ${esc(h.action)}">${esc(h.action)}</span>
+                <strong>[${esc(h.key.toUpperCase())}]</strong>
+                <span>${esc(h.summary || '')}</span>
+              </div>
+              <div style="font-size:.82rem;color:var(--mu);margin-top:4px">
+                By ${esc(h.admin_email || 'Administrator')} • ${fmtDT(h.at)} • History #${h.id}
+              </div>
+            </div>
+            <div>
+              ${(h.action === 'published' || h.action === 'restored') && h.snapshot
+                ? `<button type="button" class="ebtn pri" data-restore="${h.id}">Restore Version</button>`
+                : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    box.querySelectorAll('[data-restore]').forEach(b => {
+      b.onclick = async () => {
+        const hid = Number(b.dataset.restore);
+        if (!confirm(`Restore published version from History #${hid}? This will update the live public website and record a new history entry.`)) return;
+        b.disabled = true;
+        try {
+          const {error} = await sb.rpc('restore_version', {p_history_id: hid});
+          if (error) throw error;
+          await syncAdminData();
+          renderAll();
+          renderEditor();
+          showMsg('ed-toast', `Restored version from History #${hid} to the live website.`, 'ok');
+        } catch (err) {
+          showMsg('ed-toast', err.message, 'err');
+          b.disabled = false;
+        }
+      };
+    });
+  }
+
+  else if (sec === 'invites') {
+    const remainingSlots = Math.max(0, 4 - ED.admins.length - ED.invites.filter(x => !x.used_at && new Date(x.expires_at) > new Date()).length);
+    box.innerHTML = `
+      <div class="ed-card">
+        <h3>Authorised Administrators (${ED.admins.length} / 4)</h3>
+        <p style="color:var(--mu);font-size:.9rem">EmberTrick, AshBlazeX, SoulScreamX, and lizzy___ hold identical full-site permissions with no owner hierarchy.</p>
+        ${ED.admins.map(a => `
+          <div class="hist-row">
+            <div><strong>${esc(a.username || a.email || 'Administrator')}</strong> <span style="color:var(--mu)">(${esc(a.email || '')})</span></div>
+            <div style="font-size:.82rem;color:var(--mu)">Joined ${fmtDT(a.joined_at)}</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="ed-card">
+        <h3>Private Single-Use Invitations (${remainingSlots} slot(s) remaining)</h3>
+        <div class="ed-grid2">
+          <div class="fld"><label>Recipient Note (e.g. AshBlazeX)</label><input id="inv-note" placeholder="Admin name"></div>
+          <div class="fld"><label>Expires In (Days)</label><input id="inv-days" type="number" min="1" max="30" value="7"></div>
+        </div>
+        <div>
+          <button type="button" class="ebtn pri" id="btn-gen-inv" ${remainingSlots === 0 ? 'disabled' : ''}>Generate Private Invitation Link</button>
+        </div>
+        <div id="inv-new-box" class="msg ok" hidden></div>
+
+        ${ED.invites.map(inv => {
+          const status = inv.used_at ? 'Used' : (new Date(inv.expires_at) < new Date() ? 'Expired' : 'Active (Pending)');
+          return `
+            <div class="hist-row">
+              <div>
+                <strong>${esc(inv.note || 'Admin Invitation')}</strong> — <span class="tag-act ${status === 'Used' ? 'published' : (status === 'Expired' ? 'discarded' : 'draft')}">${status}</span>
+                <div style="font-size:.82rem;color:var(--mu)">Created ${fmtDT(inv.created_at)} • Expires ${fmtDT(inv.expires_at)}</div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+
+    const genBtn = $('btn-gen-inv');
+    if (genBtn) {
+      genBtn.onclick = async () => {
+        genBtn.disabled = true;
+        try {
+          const days = Number($('inv-days').value || 7);
+          const note = $('inv-note').value;
+          const {data: token, error} = await sb.rpc('create_invite', {p_days: days, p_note: note});
+          if (error) throw error;
+          const baseUrl = location.href.split('#')[0];
+          const link = `${baseUrl}#edits?invite=${token}`;
+          const nb = $('inv-new-box');
+          nb.innerHTML = `<strong>Single-use invitation link generated (copy now — token is hashed in DB):</strong><br><code style="word-break:break-all;user-select:all">${esc(link)}</code>`;
+          nb.hidden = false;
+          await syncAdminData();
+        } catch (err) {
+          showMsg('ed-toast', err.message, 'err');
+          genBtn.disabled = false;
+        }
+      };
+    }
+  }
+}
+
+// ============================================================================
+// EDITS WORKFLOW BUTTONS (Save Draft, Preview, Publish, Discard)
+// ============================================================================
+$('btn-save-draft').onclick = async () => {
+  const k = ED.sec;
+  try {
+    const {error} = await sb.rpc('save_draft', {
+      p_key: k,
+      p_data: WORK[k],
+      p_summary: `Updated ${k} draft`
+    });
+    if (error) throw error;
+    await syncAdminData();
+    renderEditor();
+    showMsg('ed-toast', `Shared draft saved for "${k}". All 4 administrators can now see and preview it.`, 'ok');
+  } catch (err) {
+    showMsg('ed-toast', err.message, 'err');
+  }
+};
+
+$('btn-toggle-pv').onclick = () => {
+  PREVIEW_ON = !PREVIEW_ON;
+  renderAll();
+  refreshBadges();
+  if (PREVIEW_ON) {
+    location.hash = '#home';
+  }
+};
+
+$('btn-preview-site').onclick = () => {
+  PREVIEW_ON = true;
+  renderAll();
+  location.hash = '#home';
+};
+
+$('pv-back').onclick = () => { location.hash = '#edits'; };
+$('pv-exit').onclick = () => { PREVIEW_ON = false; renderAll(); refreshBadges(); };
+
+$('btn-publish').onclick = async () => {
+  const k = ED.sec;
+  try {
+    // Save latest working edits to draft first if unsaved locally
+    if (ED.dirty[k]) {
+      const {error: e1} = await sb.rpc('save_draft', {p_key: k, p_data: WORK[k], p_summary: `Updated ${k}`});
+      if (e1) throw e1;
+    }
+    const {error: e2} = await sb.rpc('publish_draft', {p_key: k, p_summary: `Published ${k} to live website`});
+    if (e2) throw e2;
+    PREVIEW_ON = false;
+    await syncAdminData();
+    renderAll();
+    renderEditor();
+    showMsg('ed-toast', `Published "${k}"! The public website is now live with your changes.`, 'ok');
+  } catch (err) {
+    showMsg('ed-toast', err.message, 'err');
+  }
+};
+
+$('btn-discard').onclick = async () => {
+  const k = ED.sec;
+  if (!confirm(`Discard all unpublished draft changes for "${k}" and revert to the live published version?`)) return;
+  try {
+    if (SERVER_DRAFTS[k]) {
+      const {error} = await sb.rpc('discard_draft', {p_key: k});
+      if (error) throw error;
+    }
+    PREVIEW_ON = false;
+    await syncAdminData();
+    renderAll();
+    renderEditor();
+    showMsg('ed-toast', `Draft discarded for "${k}".`, 'ok');
+  } catch (err) {
+    showMsg('ed-toast', err.message, 'err');
+  }
+};
+
+$('ed-nav').onclick = e => {
+  const b = e.target.closest('button[data-sec]');
+  if (!b) return;
+  ED.sec = b.dataset.sec;
+  $('ed-nav').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+  showMsg('ed-toast', '');
+  renderEditor();
+};
+
+// ============================================================================
+// AUTHENTICATION & INVITATION HANDLERS
+// ============================================================================
+function switchAuthTab(tab) {
+  $('tab-login').classList.toggle('on', tab === 'login');
+  $('tab-reg').classList.toggle('on', tab === 'reg');
+  $('f-login').hidden = tab !== 'login';
+  $('f-reg').hidden = tab !== 'reg';
+}
+$('tab-login').onclick = () => switchAuthTab('login');
+$('tab-reg').onclick = () => switchAuthTab('reg');
+
+$('f-login').onsubmit = async e => {
+  e.preventDefault();
+  if (!sb) return;
+  showMsg('ed-msg', 'Signing in...', '');
+  const {error} = await sb.auth.signInWithPassword({
+    email: $('l-email').value.trim(),
+    password: $('l-pass').value
+  });
+  if (error) return showMsg('ed-msg', error.message, 'err');
+  showMsg('ed-msg', '');
+  await checkAdminSession();
+};
+
+$('f-reg').onsubmit = async e => {
+  e.preventDefault();
+  if (!sb) return;
+  const token = $('r-tok').value.trim();
+  const username = $('r-user').value;
+  const email = $('r-email').value.trim();
+  const password = $('r-pass').value;
+  if (!token) return showMsg('ed-msg', 'A valid private invitation token is required.', 'err');
+
+  localStorage.setItem('fsmp_pending_invite', token);
+  const redirectUrl = `${location.href.split('#')[0]}#edits?invite=${encodeURIComponent(token)}`;
+
+  showMsg('ed-msg', 'Creating administrator account...', '');
+  const {data, error} = await sb.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: redirectUrl,
+      data: {username}
+    }
+  });
+  if (error) return showMsg('ed-msg', error.message, 'err');
+
+  if (data.session) {
+    await checkAdminSession();
+  } else {
+    showMsg('ed-msg', 'Account created! Check your email inbox and click the verification link, then return here to activate EDITS.', 'ok');
+  }
+};
+
+$('btn-claim').onclick = async () => {
+  if (!sb) return;
+  const token = $('v-tok').value.trim();
+  if (!token) return showMsg('ed-msg', 'Enter your invitation token.', 'err');
+  try {
+    await sb.auth.refreshSession();
+    const {error} = await sb.rpc('claim_invite', {
+      p_token: token,
+      p_username: ED.user?.user_metadata?.username || ''
+    });
+    if (error) throw error;
+    localStorage.removeItem('fsmp_pending_invite');
+    showMsg('ed-msg', '');
+    await checkAdminSession();
+  } catch (err) {
+    showMsg('ed-msg', err.message, 'err');
+  }
+};
+
+const doLogout = async () => {
+  if (sb) await sb.auth.signOut();
+  ED.user = null;
+  ED.isAdmin = false;
+  PREVIEW_ON = false;
+  renderAll();
+  updateEditsGate();
+};
+$('btn-logout').onclick = doLogout;
+$('btn-gate-out').onclick = doLogout;
+
+// ============================================================================
+// ROUTING & EMBER PARTICLES
+// ============================================================================
+function route() {
+  const raw = (location.hash || '#home').slice(1);
+  const base = raw.split('?')[0];
+  const v = $('v-' + base) ? base : 'home';
+  document.querySelectorAll('.view').forEach(s => s.hidden = s.id !== 'v-' + v);
+  nav(false);
+  scrollTo(0, 0);
+  if (v === 'edits') checkAdminSession();
+}
+
+const cv = $('fx'), cx = cv.getContext('2d'), P = []; let W, H;
+const rs = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; };
+addEventListener('resize', rs); rs();
+for (let i = 0; i < 60; i++) P.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.8+.4, v:Math.random()*.5+.15, d:Math.random()*6});
+function f(t) {
+  cx.clearRect(0, 0, W, H);
+  cx.shadowBlur = 8;
+  cx.shadowColor = getComputedStyle(document.documentElement).getPropertyValue('--ac').trim() || '#ff6a3d';
+  for (const p of P) {
+    p.y -= p.v; p.x += Math.sin(t / 1500 + p.d) * .3;
+    if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
+    cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 7);
+    cx.fillStyle = `rgba(255,${120 + p.d * 15 | 0},70,${.25 + p.r / 4})`;
+    cx.fill();
+  }
+  if (!matchMedia('(prefers-reduced-motion:reduce)').matches) requestAnimationFrame(f);
 }
 f(0);
-addEventListener('hashchange',route);
-nav(false);renderAll();route();load().then(renderAll);
+
+addEventListener('hashchange', route);
+nav(false);
+renderAll();
+route();
+loadPublic().then(renderAll);
+
+ensureVisitorSession().then(() => loadPublic().then(renderAll));
+
+// Public visitors receive a server-issued anonymous identity for secure, shared reactions.
+async function ensureVisitorSession() {
+  if (!sb) return;
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) {
+    const { error } = await sb.auth.signInAnonymously();
+    if (error) console.warn('Anonymous visitor session unavailable:', error.message);
+  }
+}
 </script>
 </body>
 </html>
